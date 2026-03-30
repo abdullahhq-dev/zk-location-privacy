@@ -60,48 +60,12 @@ Instead of sharing location:
   ZK Proof → "Inside region"
   ```
 
----
 
-## Features
-
-* Private location verification
-* Rectangle-based geofencing (MVP)
-* Minimal data disclosure
-* Noir-based circuit implementation
-* Optional signed location support (anti-spoofing)
-
----
-
-## Tech Stack
-
-* Noir (ZK DSL)
 * Nargo (build/prove/verify tool)
 * Finite field arithmetic (no floating point)
 * Digital signatures (optional, for authenticated inputs)
 
 ---
-
-## Project Structure
-
-```
-zk-location-proof/
-│
-├── src/
-│   └── main.nr        # ZK circuit
-│
-├── Prover.toml        # Private inputs
-├── Nargo.toml         # Noir config
-│
-├── docs/
-│   ├── design.md
-│   ├── threat-model.md
-│
-└── scripts/
-```
-
----
-
-## How It Works
 
 ### Circuit Logic
 
@@ -121,7 +85,7 @@ Where:
 
 ### Proof Flow
 
-1. User inputs private location
+1. User inputs private location (signed)
 2. The circuit verifies the signature before performing region checks
 3. Circuit checks region constraints
 4. Proof is generated
@@ -129,92 +93,7 @@ Where:
 
 ---
 
-## Running the Project
-
-### 1. Install Noir
-
-Follow: https://noir-lang.org
-
----
-
-### 2. Build
-
-```
-nargo compile
-```
-
----
-
-### 3. Generate Proof
-
-```
-nargo prove
-```
-
----
-
-### 4. Verify Proof
-
-```
-nargo verify
-```
-
----
-
-## Example Input
-
-```
-lat = 129716  
-lon = 775946  
-
-lat_min = 120000  
-lat_max = 130000  
-lon_min = 770000  
-lon_max = 780000  
-```
-
-*(Fixed-point representation: scaled integers instead of floats)*
-
----
-
-## Privacy Guarantees
-
-This system ensures:
-
-* Exact location is never revealed
-* Only region membership is disclosed
-* No unnecessary data leakage
-
----
-
-## Comparison with Existing Systems
-
-| Method                 | Privacy            |
-| ---------------------- | ------------------ |
-| Raw GPS sharing        | None               |
-| Approximate location   | Partial            |
-| Geofencing APIs        | Trust-based        |
-| **ZKP (this project)** | Minimal disclosure |
-
----
-
-### Mitigations
-
-* ZKP ensures correctness of computation
-* Signed inputs help prevent spoofing
-
----
-
-## Limitations
-
-* Does not prevent OS-level tracking
-* Rectangle region only (for now)
-
----
-
-
 ## Use Cases
 
 * Location-based access control
 * Geo-restricted content
-* Anonymous attendance systems
