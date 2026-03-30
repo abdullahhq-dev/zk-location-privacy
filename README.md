@@ -12,7 +12,7 @@ Current location-based services require users to share precise GPS coordinates, 
 * Location profiling
 * Data misuse by third parties
 
-This project demonstrates how Zero-Knowledge Proofs can eliminate unnecessary data sharing while optionally ensuring data authenticity.
+This project demonstrates how Zero-Knowledge Proofs can eliminate unnecessary data sharing while ensuring data authenticity.
 
 ---
 
