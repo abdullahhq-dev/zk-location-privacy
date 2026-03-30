@@ -38,7 +38,7 @@ We construct a Zero-Knowledge circuit (using Noir) that proves:
 > There exists (lat, lon) such that:
 >
 > * (lat, lon) lies within a region
-> * (optionally) the location is authenticated using a signature
+> * The location is authenticated using a signature
 
 The verifier learns **only the truth of the statement**, and nothing else.
 
@@ -122,18 +122,10 @@ Where:
 ### Proof Flow
 
 1. User inputs private location
-2. Circuit checks region constraints
-3. Proof is generated
-4. Verifier checks proof
-
----
-
-### Optional: Authenticated Location
-
-To prevent spoofing, the system can be extended so that:
-
-* A trusted authority signs `(lat, lon, timestamp)`
-* The circuit verifies the signature before performing region checks
+2. The circuit verifies the signature before performing region checks
+3. Circuit checks region constraints
+4. Proof is generated
+5. Verifier checks proof
 
 ---
 
@@ -199,53 +191,30 @@ This system ensures:
 
 | Method                 | Privacy            |
 | ---------------------- | ------------------ |
-| Raw GPS sharing        | ❌ None             |
+| Raw GPS sharing        | None               |
 | Approximate location   | Partial            |
 | Geofencing APIs        | Trust-based        |
 | **ZKP (this project)** | Minimal disclosure |
 
 ---
 
-## Threat Model
-
-### Adversary
-
-* Malicious user (fake location)
-* Curious verifier
-
 ### Mitigations
 
 * ZKP ensures correctness of computation
-* (Optional) signed inputs help prevent spoofing
+* Signed inputs help prevent spoofing
 
 ---
 
 ## Limitations
 
-* Assumes honest location input (current version)
 * Does not prevent OS-level tracking
 * Rectangle region only (for now)
 
 ---
 
-## Future Work
-
-* Signature verification (anti-spoofing)
-* Polygon region support
-* Circle-based geofencing
-* Integration with mobile devices
-* TEE-based location attestation
-
----
 
 ## Use Cases
 
 * Location-based access control
 * Geo-restricted content
 * Anonymous attendance systems
-
----
-
-## Key Insight
-
-> "Trust the proof, not the data."
