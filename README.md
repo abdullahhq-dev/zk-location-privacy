@@ -44,28 +44,6 @@ The verifier learns **only the truth of the statement**, and nothing else.
 
 ---
 
-## Key Idea
-
-Instead of sharing location:
-
-* Traditional system:
-
-  ```
-  (lat, lon) → server
-  ```
-
-* This system:
-
-  ```
-  ZK Proof → "Inside region"
-  ```
-
-
-* Nargo (build/prove/verify tool)
-* Finite field arithmetic (no floating point)
-* Digital signatures (optional, for authenticated inputs)
-
----
 
 ### Circuit Logic
 
